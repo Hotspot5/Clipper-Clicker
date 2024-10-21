@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-VERSION = 'DEMO.1'
+VERSION = '0.1.1'
 
 starttime = time.time()
 
@@ -33,6 +33,7 @@ perclick = 1
 
 os.system('cls')
 print(f'Version: {VERSION}')
+print()
 input('[enter] to continue')
 
 while True:
@@ -142,7 +143,6 @@ while True:
                 
                 os.system('cls')
                 print('Please Confirm:')
-                print(sum)
                 try:
                     print(f'Cost: {"{:,}".format(round(sum))}')
                 except:
