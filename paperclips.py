@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-VERSION = '0.1.0'
+VERSION = '0.2.0 prerelease 1'
 
 starttime = time.time()
 
@@ -19,13 +19,21 @@ class Generator:
         self.number = 0
 
 generators = [
-    Generator('Machine', 'A Machine that makes Paperclips automatically', 10, 1.1, 0, 1), 
-    Generator('Factory', 'A Factory that produces Machines on an industrial scale', 1000, 1.2, 1, 2), 
-    Generator('Builder', 'A Builder to build all these Factories for you', 30000, 1.3, 3, 4), 
-    Generator('Employer', 'An Employer to employ handy Builders', 10**6, 1.4, 10, 8), 
-    Generator('Firm', 'A Firm to set up recruitment centers to get you more Employers', 10**9, 1.5, 100, 16), 
-    Generator('Entrepreneur', 'An Entrepreneur to set up brand new Firms for you', 10**12, 1.6, 1000, 32), 
-    Generator('Advert', 'Paid Advertisement to attract aspiring Entrepreneurs', 10**15, 1.7, 10000, 64)
+    Generator('Machine', 'A Machine that makes Paperclips automatically', 10, 1.05, 0, 1), 
+    Generator('Factory', 'A Factory that produces Machines on an industrial scale', 1000, 1.1, 1, 2), 
+    Generator('Builder', 'A Builder to build all these Factories for you', 30000, 1.15, 3, 4), 
+    Generator('Employer', 'An Employer to employ handy Builders', 10**6, 1.2, 10, 8), 
+    Generator('Firm', 'A Firm to set up recruitment centers to get you more Employers', 10**9, 1.25, 100, 16), 
+    Generator('Entrepreneur', 'An Entrepreneur to set up brand new Firms for you', 10**12, 1.3, 10**3, 32), 
+    Generator('Advert', 'Paid Advertisement to attract aspiring Entrepreneurs', 10**15, 1.35, 10**4, 64), 
+    Generator('Quantum', 'Quantum Computers to mine crypto for Ads (let the transformation begin ;D)', 10**21, 1.4, 10**6, 128), 
+    Generator('Rocket', 'A Rocket to ship Quantum Computers to other planets', 10**27, 1.45, 10**8, 256), 
+    Generator('Planet', 'Manufacture planets for more space for Quantum Computers!', 10**36, 1.5, 10**11, 512), 
+    Generator('Star', 'Manufacture Stars to attract Planets with gravity!', 10**45, 1.55, 10**14, 1024), 
+    Generator('Galaxy', 'Collapse matter into a Supermassive Black Hole to form a Galaxy of Stars!', 10**57, 1.6, 10**18, 2048), 
+    Generator('Universe', 'Break free of the 3rd Dimension and forge Universes of Paperclips!', 10**69, 1.65, 10**22, 3600), 
+    Generator('Multiverse', 'Summon entire Multiverses by contorting spacetime to generate limitless realities!', 10**84, 1.7, 10**27, 3600), 
+    Generator('Dimensions', 'Explore the infinite possibilities of higher Dimensions, How far can you go?', 10**100, 1, 10**33, 3600)
 ]
 
 paperclips = 0
