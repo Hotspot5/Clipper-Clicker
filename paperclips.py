@@ -143,6 +143,7 @@ while True:
                 
                 os.system('cls')
                 print('Please Confirm:')
+                print()
                 try:
                     print(f'Cost: {"{:,}".format(round(sum))}')
                 except:
