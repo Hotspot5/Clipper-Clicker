@@ -20,7 +20,7 @@ class Generator:
 
 generators = [
     Generator('Machine', 'A Machine that makes Paperclips automatically', 10, 1.05, 0, 1), 
-    Generator('Factory', 'A Factory that produces Machines on an industrial scale', 1000, 1.1, 1, 2), 
+    Generator('Factory', 'A Factory that produces Machines on an industrial scale', 500, 1.1, 1, 2), 
     Generator('Builder', 'A Builder to build all these Factories for you', 30000, 1.15, 3, 4), 
     Generator('Employer', 'An Employer to employ handy Builders', 10**6, 1.2, 10, 8), 
     Generator('Firm', 'A Firm to set up recruitment centers to get you more Employers', 10**9, 1.25, 100, 16), 
@@ -33,7 +33,7 @@ generators = [
     Generator('Galaxy', 'Collapse matter into a Supermassive Black Hole to form a Galaxy of Stars!', 10**57, 1.6, 10**18, 2048), 
     Generator('Universe', 'Break free of the 3rd Dimension and forge Universes of Paperclips!', 10**69, 1.65, 10**22, 3600), 
     Generator('Multiverse', 'Summon entire Multiverses by contorting spacetime to generate limitless realities!', 10**84, 1.7, 10**27, 3600), 
-    Generator('Dimensions', 'Explore the infinite possibilities of higher Dimensions, How far can you go?', 10**100, 1, 10**33, 3600)
+    Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to summon... MORE... PAPERCLIPS!', 10**100, 1, 10**33, 3600)
 ]
 
 paperclips = 0
@@ -109,14 +109,20 @@ while True:
 
             print(generators[action-1].name.upper())
             print()
-            print(f'Cost: {"{:,}".format(round(generators[action-1].cost))}')
-            print(f'Owned: {"{:,}".format(round(generators[action-1].number))}')
-            print()
-            print(f'Paperclips: {"{:,}".format(round(paperclips))}')
-            print()
             print('-' * 10)
             print()
             print(f'"{generators[action-1].description}"')
+            print()
+            print('-' * 10)
+            print()
+            print(f'Cost: {"{:,}".format(round(generators[action-1].cost))}')
+            print(f'(Paperclips: {"{:,}".format(round(paperclips))})')
+            print()
+            print(f'Owned: {"{:,}".format(round(generators[action-1].number))}')
+            print()
+            print(f'Production Time: {generators[action-1].time} second(s)')
+            print(f'Cost Multiplier: x{generators[action-1].costmult}')
+            print(f'Per Click: +{generators[action-1].click}')
             print()
             print('-' * 10)
             print()
