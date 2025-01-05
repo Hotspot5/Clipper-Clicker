@@ -36,7 +36,7 @@ generators = [
     Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to summon... MORE... PAPERCLIPS!', 10**100, 1, 10**33, 3600)
 ]
 
-paperclips = 0
+paperclips = 10**100
 perclick = 1
 
 os.system('cls')
@@ -122,13 +122,13 @@ while True:
             print()
             print(f'Production Time: {generators[action-1].time} second(s)')
             print(f'Cost Multiplier: x{generators[action-1].costmult}')
-            print(f'Per Click: +{generators[action-1].click}')
+            print(f'Per Click: +{"{:,}".format(generators[action-1].click)}')
             print()
             print('-' * 10)
             print()
             print('c - Cancel')
             print('[enter] - Purchase 1')
-            print('[number] - Purchase Custom Amount')
+            print('[number] - Purchase Custom Amount (no more than 1000)')
             print()
 
             action2 = input('> ')
@@ -146,33 +146,35 @@ while True:
                         generators[action-1].number += 1
                         perclick += generators[action-1].click
             else:
-                os.system('cls')
-                print('loading...')
-                sum = generators[action-1].cost
-                cost = generators[action-1].cost
-                
-                for x in range(action2-1):
-                    cost *= generators[action-1].costmult
-                    sum += cost
-                
-                os.system('cls')
-                print('Please Confirm:')
-                print()
-                try:
-                    print(f'Cost: {"{:,}".format(round(sum))}')
-                except:
-                    pass
-                else:
-                    print(f'Paperclips: {"{:,}".format(round(paperclips))}')
+                if action2 <= 1000:
+                    os.system('cls')
+                    print('calculating...')
+                    
+                    sum = generators[action-1].cost
+                    cost = generators[action-1].cost
+                    
+                    for x in range(action2-1):
+                        cost *= generators[action-1].costmult
+                        sum += cost
+                    
+                    os.system('cls')
+                    print('Please Confirm:')
                     print()
-                    print('c - Cancel')
-                    print('[enter] - Confirm and Pay')
-                    print()
-                    action3 = input('> ')
+                    try:
+                        print(f'Cost: {"{:,}".format(round(sum))}')
+                    except:
+                        pass
+                    else:
+                        print(f'Paperclips: {"{:,}".format(round(paperclips))}')
+                        print()
+                        print('c - Cancel')
+                        print('[enter] - Confirm and Pay')
+                        print()
+                        action3 = input('> ')
 
-                    if action3.lower() != 'c':
-                        if paperclips >= sum:
-                            paperclips -= sum
-                            generators[action-1].cost *= generators[action-1].costmult ** action2
-                            generators[action-1].number += action2
-                            perclick += generators[action-1].click * action2
+                        if action3.lower() != 'c':
+                            if paperclips >= sum:
+                                paperclips -= sum
+                                generators[action-1].cost *= generators[action-1].costmult ** action2
+                                generators[action-1].number += action2
+                                perclick += generators[action-1].click * action2
