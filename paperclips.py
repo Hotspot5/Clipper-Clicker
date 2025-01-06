@@ -36,7 +36,7 @@ generators = [
     Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to summon... MORE... PAPERCLIPS!', 10**100, 1, 10**33, 3600)
 ]
 
-paperclips = 10**100
+paperclips = 0
 perclick = 1
 
 os.system('cls')
