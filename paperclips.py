@@ -36,11 +36,21 @@ generators = [
     Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to summon... MORE... PAPERCLIPS!', 10**100, 1, 10**33, 3600)
 ]
 
-paperclips = 0
-perclick = 1
+savefile = open('save.txt', 'r')
+savelines = savefile.readlines()
+
+paperclips = float(savelines[savelines.index('paperclips\n')+1].strip('\n'))
+perclick = float(savelines[savelines.index('perclick\n')+1].strip('\n'))
+
+for x in range(len(generators)):
+    generators[x].number = float(savelines[savelines.index('generators\n')+x+1].strip('\n'))
+    
+savefile.close()
 
 os.system('cls')
+
 print(f'Version: {VERSION}')
+print('This game saves automatically with every input')
 print()
 input('[enter] to continue')
 
@@ -95,8 +105,19 @@ while True:
     print()
     print('[number] - View Generator')
     print('[blank] - Leave Blank to Update Paperclips')
+    print('R - Reset Progress (w/ confirmation)')
     print()
+    
     action = input('> ')
+    
+    savefile = open('save.txt', 'w')
+    towrite = f'paperclips\n{paperclips}\n'
+    towrite += f'perclick\n{perclick}\n'
+    towrite += 'generators\n'
+    for generator in generators:
+        towrite += str(generator.number) + '\n'
+    savefile.write(towrite)
+    savefile.close()
 
     try:
         action = int(action)
