@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 
 starttime = time.time()
 
