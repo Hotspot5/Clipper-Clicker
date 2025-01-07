@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-VERSION = '0.2.1'
+VERSION = '0.3.0'
 
 starttime = time.time()
 
@@ -38,7 +38,7 @@ generators = [
 
 savefile = open('save.txt', 'r')
 savelines = savefile.readlines()
-
+    
 paperclips = float(savelines[savelines.index('paperclips\n')+1].strip('\n'))
 perclick = float(savelines[savelines.index('perclick\n')+1].strip('\n'))
 
@@ -105,7 +105,7 @@ while True:
     print()
     print('[number] - View Generator')
     print('[blank] - Leave Blank to Update Paperclips')
-    print('R - Reset Progress (w/ confirmation)')
+    print('[R] - Reset Progress (w/ confirmation)')
     print()
     
     action = input('> ')
@@ -114,10 +114,37 @@ while True:
     towrite = f'paperclips\n{paperclips}\n'
     towrite += f'perclick\n{perclick}\n'
     towrite += 'generators\n'
+    
     for generator in generators:
         towrite += str(generator.number) + '\n'
+        
     savefile.write(towrite)
     savefile.close()
+    
+    if action == 'R':
+        
+        os.system('cls')
+        confirmation = input('Are you sure you want to reset all progress? (yes/no)\n> ')
+        
+        if confirmation.lower() == 'yes':
+            savefile = open('save.txt', 'w')
+            towrite = f'paperclips\n0.0\n'
+            towrite += f'perclick\n1.0\n'
+            towrite += 'generators\n'
+            
+            for generator in generators:
+                towrite += '0.0\n'
+                
+            savefile.write(towrite)
+            savelines = savefile.readlines()
+            
+            paperclips = float(savelines[savelines.index('paperclips\n')+1].strip('\n'))
+            perclick = float(savelines[savelines.index('perclick\n')+1].strip('\n'))
+
+            for x in range(len(generators)):
+                generators[x].number = float(savelines[savelines.index('generators\n')+x+1].strip('\n'))
+            
+            savefile.close()
 
     try:
         action = int(action)
@@ -125,6 +152,7 @@ while True:
         pass
 
     if isinstance(action, int):
+        
         if action <= unlocked:
             os.system('cls')
 
@@ -147,7 +175,7 @@ while True:
             print()
             print('-' * 10)
             print()
-            print('c - Cancel')
+            print('[c] - Cancel')
             print('[enter] - Purchase 1')
             print('[number] - Purchase Custom Amount (no more than 1000)')
             print()
@@ -181,16 +209,19 @@ while True:
                     os.system('cls')
                     print('Please Confirm:')
                     print()
+                    
                     try:
                         print(f'Cost: {"{:,}".format(round(sum))}')
                     except:
                         pass
                     else:
+                        
                         print(f'Paperclips: {"{:,}".format(round(paperclips))}')
                         print()
                         print('c - Cancel')
                         print('[enter] - Confirm and Pay')
                         print()
+                        
                         action3 = input('> ')
 
                         if action3.lower() != 'c':
