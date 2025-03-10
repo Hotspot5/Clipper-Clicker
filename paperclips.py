@@ -63,7 +63,7 @@ while True:
     for x in range(len(generators)):
         if x == 0:
             paperclips += dur / generators[x].time * generators[x].number
-            break
+            continue
         generators[x-1].number += dur / generators[x].time * generators[x].number
         perclick += dur / generators[x].time * generators[x].number * generators[x-1].click
 

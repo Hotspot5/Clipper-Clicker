@@ -1,10 +1,10 @@
 paperclips
-15.0
+0
 perclick
-1.0
+1
 generators
-0.0
-0.0
+0
+0
 0.0
 0.0
 0.0
