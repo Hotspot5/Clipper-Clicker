@@ -60,7 +60,7 @@ while True:
     paperclips += perclick
     dur = time.time() - starttime
 
-    for x in range(len(generators)-1, -1, -1):
+    for x in range(len(generators)):
         if x == 0:
             paperclips += dur / generators[x].time * generators[x].number
             break
