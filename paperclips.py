@@ -4,7 +4,14 @@ import os
 import time
 import math
 
-VERSION = '0.3.0'
+def output(var):
+    if var < 10**20:
+        return "{:,}".format(round(var))
+    else:
+        power = int(math.log(var, 10)+0.0001)
+        return f"{round(var/(10**power), 3)} x 10^{power}"
+
+VERSION = '0.3.1'
 
 starttime = time.time()
 
@@ -18,6 +25,15 @@ class Generator:
         self.time = time
         self.number = 0
 
+class clickGenerator:
+    def __init__(self, name, description, cost, costmult, time):
+        self.name = name
+        self.description = description
+        self.cost = cost
+        self.costmult = costmult
+        self.time = time
+        self.number = 0
+
 generators = [
     Generator('Machine', 'A Machine that makes Paperclips automatically', 10, 1.05, 0, 1), 
     Generator('Factory', 'A Factory that produces Machines on an industrial scale', 500, 1.1, 1, 2), 
@@ -25,15 +41,23 @@ generators = [
     Generator('Employer', 'An Employer to employ handy Builders', 10**6, 1.2, 10, 8), 
     Generator('Firm', 'A Firm to set up recruitment centers to get you more Employers', 10**9, 1.25, 100, 16), 
     Generator('Entrepreneur', 'An Entrepreneur to set up brand new Firms for you', 10**12, 1.3, 10**3, 32), 
-    Generator('Advert', 'Paid Advertisement to attract aspiring Entrepreneurs', 10**15, 1.35, 10**4, 64), 
-    Generator('Quantum', 'Quantum Computers to mine crypto for Ads (let the transformation begin ;D)', 10**21, 1.4, 10**6, 128), 
-    Generator('Rocket', 'A Rocket to ship Quantum Computers to other planets', 10**27, 1.45, 10**8, 256), 
-    Generator('Planet', 'Manufacture planets for more space for Quantum Computers!', 10**36, 1.5, 10**11, 512), 
-    Generator('Star', 'Manufacture Stars to attract Planets with gravity!', 10**45, 1.55, 10**14, 1024), 
-    Generator('Galaxy', 'Collapse matter into a Supermassive Black Hole to form a Galaxy of Stars!', 10**57, 1.6, 10**18, 2048), 
-    Generator('Universe', 'Break free of the 3rd Dimension and forge Universes of Paperclips!', 10**69, 1.65, 10**22, 3600), 
-    Generator('Multiverse', 'Summon entire Multiverses by contorting spacetime to generate limitless realities!', 10**84, 1.7, 10**27, 3600), 
-    Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to summon... MORE... PAPERCLIPS!', 10**100, 1, 10**33, 3600)
+    Generator('Advert', 'Paid Advertisement to attract aspiring Entrepreneurs', 10**15, 1.35, 10**5, 64), 
+    Generator('Quantum', 'Quantum Computers to mine crypto for Adverts', 10**21, 1.4, 10**9, 128), 
+    Generator('Rocket', 'A Rocket to ship Quantum Computers to other planets', 10**27, 1.45, 10**12, 256), 
+    Generator('Planet', 'Manufacture planets for more space for Quantum Computers!', 10**36, 1.5, 10**18, 512), 
+    Generator('Star', 'Manufacture Stars to attract Planets with gravity!', 10**45, 1.6, 10**24, 1024), 
+    Generator('Galaxy', 'Collapse matter into a Supermassive Black Hole to form a Galaxy of Stars!', 10**57, 1.7, 10**30, 2048), 
+    Generator('Universe', 'Break free of the 3rd Dimension and forge Universes of Paperclips!', 10**69, 1.8, 10**36, 3600), 
+    Generator('Multiverse', 'Summon entire Multiverses by contorting spacetime to generate limitless realities!', 10**84, 1.9, 10**42, 3600), 
+    Generator('Dimensions', 'Rip the fabric of reality into higher dimensions to fit more paperclips!', 10**100, 2, 10**50, 3600)
+]
+
+clickGenerators = [
+    clickGenerator('Price', 'raising the selling price of your paperclips, although costly, can greatly increase your clips per click', 10**6, 2, 0), 
+    clickGenerator('Marketing', 'investing in marketing will make raising prices easier', 10**9, 2, 10), 
+    clickGenerator('Thief', 'Hire thugs to steal money to invest in marketing', 10**18, 2, 100), 
+    clickGenerator('Guild', 'criminal guilds to attract thieves with the promise of money', 10**36, 2, 1000), 
+    clickGenerator('Cult', 'secretly cults control everything, and start new guilds across the globe!', 10**72, 2, 10), 
 ]
 
 savefile = open('save.txt', 'r')
@@ -69,18 +93,14 @@ while True:
 
     starttime = time.time()
 
-    print(f'Paperclips: {"{:,}".format(round(paperclips))}')
+    print(f'Paperclips: {output(paperclips)}')
     print()
     print('-' * 10)
     print()
-    print(f'Per Click: {"{:,}".format(round(perclick))}')
-    print(f'Per Second: {"{:,}".format(round(generators[0].number))}')
+    print(f'Per Click: {output(perclick)}')
+    print(f'Per Second: {output(generators[0].number)}')
     print()
     print('-' * 10)
-    print()
-    print('UPGRADES:')
-    print()
-    print('(coming soon)')
     print()
     print('GENERATORS:')
     print()
@@ -89,7 +109,7 @@ while True:
 
     for x in range(len(generators)):
 
-        generatorDisplay = f'{x+1} - {generators[x].name}: {"{:,}".format(round(generators[x].number))} (Costs {"{:,}".format(round(generators[x].cost))})'
+        generatorDisplay = f'{x+1} - {generators[x].name}: {output(generators[x].number)} (Costs {output(generators[x].cost)})'
 
         if x == 0:
             print(generatorDisplay)
@@ -164,8 +184,8 @@ while True:
             print()
             print('-' * 10)
             print()
-            print(f'Cost: {"{:,}".format(round(generators[action-1].cost))}')
-            print(f'(Paperclips: {"{:,}".format(round(paperclips))})')
+            print(f'Cost: {output(generators[action-1].cost)}')
+            print(f'(Paperclips: {output(paperclips)})')
             print()
             print(f'Owned: {"{:,}".format(round(generators[action-1].number))}')
             print()
@@ -211,12 +231,12 @@ while True:
                     print()
                     
                     try:
-                        print(f'Cost: {"{:,}".format(round(sum))}')
+                        print(f'Cost: {output(sum)}')
                     except:
                         pass
                     else:
                         
-                        print(f'Paperclips: {"{:,}".format(round(paperclips))}')
+                        print(f'Paperclips: {output(paperclips)}')
                         print()
                         print('c - Cancel')
                         print('[enter] - Confirm and Pay')
